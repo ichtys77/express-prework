@@ -10,6 +10,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.static(path.join(__dirname + '/public')));
+
 app.get('/', (req, res) => {
   res.show('index.html');
 });
@@ -26,8 +28,12 @@ app.get('/info', (req, res) => {
   res.show('info.html');
 });
 
-app.get('/history', (req, res) => {
+app.get('/history', (req, res, next) => {
   res.show('history.html');
+});
+
+app.use((req, res) => {
+  res.status(404).send('404, pocałuj Aśkuu...');
 });
 
 app.listen(8000, () => {
